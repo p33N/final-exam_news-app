@@ -1,5 +1,3 @@
-# final-exam_news-app
-Nyheds/artikel mobil applikation 
 # Final Exam / School Project - News Application
 
 school project - Final Exam - SDE HF6
@@ -42,6 +40,8 @@ Contributors names and contact info
 ex. Niklas Hall   [@p33N](https://github.com/p33N)
 
 ex. Anders Buch   [@Arssi112](https://github.com/arssi112)
+
+ex. Alexander Lawaetz   [@alexander-lawaetz](https://github.com/alexander-lawaetz)
 
 ## Version History
 
