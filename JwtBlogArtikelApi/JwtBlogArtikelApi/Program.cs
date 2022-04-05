@@ -11,9 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var planetScaleConnectionString = builder.Configuration["ConnectionStrings:PlanetScaleConnectionString"];
-builder.Services.AddDbContextPool<PlanetScaleDbContext>
-    (options => options.UseMySql(planetScaleConnectionString, ServerVersion.AutoDetect(planetScaleConnectionString)));
+var connectionString = builder.Configuration["ConnectionStrings:ConnectionString"];
+builder.Services.AddDbContextPool<BlogArtiklenDbContext>
+    (options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 
 var app = builder.Build();
