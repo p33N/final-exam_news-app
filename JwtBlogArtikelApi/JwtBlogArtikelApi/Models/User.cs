@@ -14,8 +14,11 @@
 
         public bool Subscribtion { get; set; }
 
-        public IList<Follows> Followers { get; set; }
+        public IList<Follow> Followers { get; set; }
 
-        public IList<Follows> Followings { get; set; }
+        public IList<Follow> Followings { get; set; }
+        public IList<Bookmark> Bookmarks { get; set; }
+
+        public ICollection<Article> Articles { get; set; }
     }
 }

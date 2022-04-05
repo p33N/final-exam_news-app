@@ -1,6 +1,6 @@
 ﻿namespace JwtBlogArtikelApi.Models
 {
-    public class Follows
+    public class Follow
     {
         public int FollowerId { get; set; }
         public User Follower { get; set; }
