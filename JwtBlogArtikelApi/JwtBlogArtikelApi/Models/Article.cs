@@ -10,7 +10,8 @@
         public int UserId { get; set; }
         public User Author { get; set; }
         public IList<Bookmark> Bookmarks { get; set; }
-        public IList<Tag> Tags { get; set; }
+        public IList<ArticleTag> ArticleTags { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
     }
 }

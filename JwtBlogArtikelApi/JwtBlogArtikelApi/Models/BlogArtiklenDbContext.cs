@@ -37,6 +37,27 @@ namespace JwtBlogArtikelApi.Models
                 .WithMany(u => u.Articles)
                 .HasForeignKey(s => s.UserId);
 
+
+            modelBuilder.Entity<Comment>()
+                .HasOne<User>(s => s.User)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(s => s.UserId);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne<Article>(s => s.Article)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(s => s.ArticleId);
+
+            modelBuilder.Entity<Reply>()
+                .HasOne<User>(s => s.User)
+                .WithMany(u => u.Replies)
+                .HasForeignKey(s => s.UserId);
+
+            modelBuilder.Entity<Reply>()
+                .HasOne<Comment>(s => s.Comment)
+                .WithMany(u => u.Replies)
+                .HasForeignKey(s => s.CommentId);
+
             modelBuilder.Entity<Bookmark>().HasKey(sc => new { sc.UserId, sc.ArtilceId });
 
             modelBuilder.Entity<Bookmark>()
@@ -52,17 +73,17 @@ namespace JwtBlogArtikelApi.Models
 
             modelBuilder.Entity<ArticleTag>().HasKey(sc => new { sc.TagId, sc.ArtilceId });
 
-            /*modelBuilder.Entity<ArticleTag>()
+            modelBuilder.Entity<ArticleTag>()
                 .HasOne<Article>(sc => sc.Article)
-                .WithMany(s => s.Tags)
-                .HasForeignKey(sc => sc.ArticleId);
+                .WithMany(s => s.ArticleTags)
+                .HasForeignKey(sc => sc.ArtilceId);
 
 
             modelBuilder.Entity<ArticleTag>()
                 .HasOne<Tag>(sc => sc.Tag)
-                .WithMany(s => s.Articles)
+                .WithMany(s => s.ArticleTags)
                 .HasForeignKey(sc => sc.TagId);
-*/
+
         }
 
     }
