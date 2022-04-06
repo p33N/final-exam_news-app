@@ -37,6 +37,9 @@ namespace JwtBlogArtikelApi.Migrations
                         .IsRequired()
                         .HasColumnType("longblob");
 
+                    b.Property<int>("LikeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
@@ -44,6 +47,8 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LikeId");
 
                     b.HasIndex("UserId");
 
@@ -93,6 +98,9 @@ namespace JwtBlogArtikelApi.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("LikeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -100,9 +108,11 @@ namespace JwtBlogArtikelApi.Migrations
 
                     b.HasIndex("ArticleId");
 
+                    b.HasIndex("LikeId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("JwtBlogArtikelApi.Models.Email", b =>
@@ -141,6 +151,20 @@ namespace JwtBlogArtikelApi.Migrations
                     b.ToTable("Follows");
                 });
 
+            modelBuilder.Entity("JwtBlogArtikelApi.Models.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Counter")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Like");
+                });
+
             modelBuilder.Entity("JwtBlogArtikelApi.Models.Reply", b =>
                 {
                     b.Property<int>("Id")
@@ -148,6 +172,9 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LikeId")
                         .HasColumnType("int");
 
                     b.Property<string>("ReplyComment")
@@ -161,9 +188,11 @@ namespace JwtBlogArtikelApi.Migrations
 
                     b.HasIndex("CommentId");
 
+                    b.HasIndex("LikeId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reply");
+                    b.ToTable("Replies");
                 });
 
             modelBuilder.Entity("JwtBlogArtikelApi.Models.Tag", b =>
@@ -209,8 +238,40 @@ namespace JwtBlogArtikelApi.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("JwtBlogArtikelApi.Models.UserLike", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Desciminator")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("LikeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLikes");
+                });
+
             modelBuilder.Entity("JwtBlogArtikelApi.Models.Article", b =>
                 {
+                    b.HasOne("JwtBlogArtikelApi.Models.Like", "Like")
+                        .WithMany()
+                        .HasForeignKey("LikeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("JwtBlogArtikelApi.Models.User", "Author")
                         .WithMany("Articles")
                         .HasForeignKey("UserId")
@@ -218,6 +279,8 @@ namespace JwtBlogArtikelApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
+
+                    b.Navigation("Like");
                 });
 
             modelBuilder.Entity("JwtBlogArtikelApi.Models.ArticleTag", b =>
@@ -266,6 +329,12 @@ namespace JwtBlogArtikelApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("JwtBlogArtikelApi.Models.Like", "Like")
+                        .WithMany()
+                        .HasForeignKey("LikeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("JwtBlogArtikelApi.Models.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
@@ -273,6 +342,8 @@ namespace JwtBlogArtikelApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Article");
+
+                    b.Navigation("Like");
 
                     b.Navigation("User");
                 });
@@ -304,6 +375,12 @@ namespace JwtBlogArtikelApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("JwtBlogArtikelApi.Models.Like", "Like")
+                        .WithMany()
+                        .HasForeignKey("LikeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("JwtBlogArtikelApi.Models.User", "User")
                         .WithMany("Replies")
                         .HasForeignKey("UserId")
@@ -311,6 +388,8 @@ namespace JwtBlogArtikelApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Comment");
+
+                    b.Navigation("Like");
 
                     b.Navigation("User");
                 });
@@ -324,6 +403,17 @@ namespace JwtBlogArtikelApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Email");
+                });
+
+            modelBuilder.Entity("JwtBlogArtikelApi.Models.UserLike", b =>
+                {
+                    b.HasOne("JwtBlogArtikelApi.Models.User", "User")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("JwtBlogArtikelApi.Models.Article", b =>
@@ -364,6 +454,8 @@ namespace JwtBlogArtikelApi.Migrations
                     b.Navigation("Followings");
 
                     b.Navigation("Replies");
+
+                    b.Navigation("UserLikes");
                 });
 #pragma warning restore 612, 618
         }

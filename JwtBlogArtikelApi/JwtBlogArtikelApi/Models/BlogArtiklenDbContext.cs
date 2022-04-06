@@ -12,9 +12,12 @@ namespace JwtBlogArtikelApi.Models
         public DbSet<Email> Emails => Set<Email>();
         public DbSet<Follow> Follows => Set<Follow>();
         public DbSet<Article> Articles => Set<Article>();
-        public DbSet<Bookmark> Bookmarks => Set<Bookmark>();
+        public DbSet<Comment> Comments => Set<Comment>();
+        public DbSet<Reply> Replies => Set<Reply>();
         public DbSet<Tag> Tags => Set<Tag>();
+        public DbSet<Bookmark> Bookmarks => Set<Bookmark>();
         public DbSet<ArticleTag> ArticleTags => Set<ArticleTag>();
+        public DbSet<UserLike> UserLikes => Set<UserLike>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -84,6 +87,10 @@ namespace JwtBlogArtikelApi.Models
                 .WithMany(s => s.ArticleTags)
                 .HasForeignKey(sc => sc.TagId);
 
+            modelBuilder.Entity<UserLike>()
+                .HasOne<User>(sc => sc.User)
+                .WithMany(s => s.UserLikes)
+                .HasForeignKey(sc => sc.UserId);
         }
 
     }

@@ -14,5 +14,6 @@
         public ICollection<Article> Articles { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Reply> Replies { get; set; }
+        public ICollection<UserLike> UserLikes { get; set; }
     }
 }

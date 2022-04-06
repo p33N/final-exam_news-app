@@ -8,6 +8,8 @@
         public Comment Comment { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int LikeId { get; set; }
+        public Like Like { get; set; }
 
     }
 }

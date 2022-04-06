@@ -12,6 +12,8 @@
         public IList<Bookmark> Bookmarks { get; set; }
         public IList<ArticleTag> ArticleTags { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public int LikeId { get; set; }
+        public Like Like { get; set; }
 
     }
 }
