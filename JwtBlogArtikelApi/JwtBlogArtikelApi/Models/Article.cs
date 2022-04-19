@@ -8,7 +8,7 @@
         public string? Content { get; set; }
         public int Likes { get; set; }
         public int UserId { get; set; }
-        public User Author { get; set; }
+        public User? Author { get; set; }
         public IList<Bookmark>? Bookmarks { get; set; }
         public IList<ArticleTag>? ArticleTags { get; set; }
         public ICollection<Comment>? Comments { get; set; }
