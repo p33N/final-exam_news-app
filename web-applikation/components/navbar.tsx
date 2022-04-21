@@ -14,7 +14,7 @@ import {
 export const Navbar: React.FC = () => {
   return (
     <>
-      <Nav className="hidden min-h-full flex-col justify-between bg-gray-50 py-12 lg:flex">
+      <Nav className="sticky top-0 hidden max-h-screen flex-col justify-between bg-gray-50 py-12 lg:flex">
         <NavLink
           href="/"
           passHref
@@ -78,7 +78,7 @@ export const Navbar: React.FC = () => {
           />
         </NavLink>
       </Nav>
-      <Nav className="fixed bottom-0 flex w-full justify-around gap-1 border-t-2 bg-gray-100 lg:hidden">
+      <Nav className="fixed bottom-0 z-10 flex w-full justify-around gap-1 border-t-2 bg-gray-100 lg:hidden">
         <NavLink
           href="/"
           passHref

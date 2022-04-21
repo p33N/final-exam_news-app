@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { AvatarImage, AvatarTypes } from './avatar'
 import {
+  BanIcon,
   BellIcon,
   BookmarkAltIcon,
+  BookmarkIcon,
   DocumentAddIcon,
+  DotsHorizontalIcon,
   HomeIcon,
   LibraryIcon,
   SearchIcon
 } from '@heroicons/react/outline'
+import { usePopper } from 'react-popper'
+import { Popover } from '@headlessui/react'
 
 interface ClassName {
   className?: string
@@ -28,6 +33,12 @@ export const SearchButton: React.FC<ClassName> = ({
 }
 
 export const BookmarkButton: React.FC<ClassName> = ({
+  className = defaultButtonStyle
+}) => {
+  return <BookmarkIcon className={className}></BookmarkIcon>
+}
+
+export const BookmarksButton: React.FC<ClassName> = ({
   className = defaultButtonStyle
 }) => {
   return <BookmarkAltIcon className={className}></BookmarkAltIcon>
@@ -65,4 +76,16 @@ export const HomeIconButton: React.FC<AvatarTypes> = ({
   alt
 }) => {
   return <img className={className} alt={alt} src={src} />
+}
+
+export const HorizontalDotsButton: React.FC<ClassName> = ({
+  className = defaultButtonStyle
+}) => {
+  return <DotsHorizontalIcon className={className}></DotsHorizontalIcon>
+}
+
+export const BanButton: React.FC<ClassName> = ({
+  className = defaultButtonStyle
+}) => {
+  return <BanIcon className={className}></BanIcon>
 }
