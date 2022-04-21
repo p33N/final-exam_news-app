@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using JwtBlogArtikelApi.Models;
 
 namespace JwtBlogArtikelApi.Models
 {
@@ -92,6 +93,9 @@ namespace JwtBlogArtikelApi.Models
                 .WithMany(s => s.UserLikes)
                 .HasForeignKey(sc => sc.UserId);
         }
+
+
+        public DbSet<JwtBlogArtikelApi.Models.Like> Like { get; set; }
 
     }
 }
