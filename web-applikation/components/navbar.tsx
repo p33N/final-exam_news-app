@@ -14,7 +14,7 @@ import {
 export const Navbar: React.FC = () => {
   return (
     <>
-      <Nav className="sticky top-0 hidden max-h-screen flex-col justify-between bg-gray-50 py-12 lg:flex">
+      <Nav className="sticky top-0 hidden max-h-screen min-w-fit flex-col justify-between bg-gray-50 py-12 lg:flex">
         <NavLink
           href="/"
           passHref
@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
           <NavLink
             href="/"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400"
+            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <HomeButton />
@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
           <NavLink
             href="/notifications"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400"
+            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <BellButton />
@@ -42,7 +42,7 @@ export const Navbar: React.FC = () => {
           <NavLink
             href="/bookmarks"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400"
+            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <BookmarkButton />
@@ -50,7 +50,7 @@ export const Navbar: React.FC = () => {
           <NavLink
             href="/drafts"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400"
+            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <ListStoryButton />
@@ -59,7 +59,7 @@ export const Navbar: React.FC = () => {
           <NavLink
             href="/write-story"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400"
+            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <WriteStoryButton />

@@ -99,8 +99,6 @@ export const ArticleSlim: React.FC<TypeArticle> = ({ key }) => {
           alt="Alexander Lawaetz"
         />
         <span className="text-sm font-semibold">Alexander Lawaetz</span>
-        <span className="text-gray-400">&#x2022;</span>
-        <span className="text-gray-400">12 hours ago</span>
       </div>
       <div className="flex gap-1">
         <div className="grow">
@@ -108,7 +106,7 @@ export const ArticleSlim: React.FC<TypeArticle> = ({ key }) => {
             React Version 18 | What&#39;s New?
           </h2>
           <div className="flex justify-between">
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-2 text-xs">
               <span className="hidden text-gray-400 sm:block">
                 Dec 11, 2021
               </span>

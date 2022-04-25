@@ -1,6 +1,7 @@
 import { Tab } from '@headlessui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import Article, { ArticleSlim } from '../components/article'
 import { SearchButton } from '../components/buttons'
 import { NavLink } from '../components/nav'
@@ -20,9 +21,9 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex min-h-screen divide-x-2 lg:mx-auto lg:max-w-[1504px]">
+      <div className="flex divide-x-2 lg:mx-auto lg:max-w-[1504px]">
         <Navbar />
-        <div className="mb-20 grow px-6">
+        <div className="grow px-6 pb-20">
           <div className="mx-auto max-w-2xl">
             <UserTopics />
             <div className="hidden">
@@ -110,9 +111,11 @@ const Sidebar: React.FC = () => {
         <h2 className="my-4 text-xl font-medium">Recommended topics</h2>
         <div className="flex flex-wrap gap-2">
           {[...range(1, 7)].map((items) => (
-            <span className="whitespace-nowrap rounded-full bg-gray-200 py-2 px-4 text-sm">
-              Hello ello
-            </span>
+            <Link href="">
+              <a className="whitespace-nowrap rounded-full bg-gray-200 py-2 px-4 text-sm transition duration-200 hover:bg-gray-400">
+                Hello ello
+              </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -121,18 +124,20 @@ const Sidebar: React.FC = () => {
         <div className="flex flex-col gap-2">
           {[...range(1, 3)].map((items) => (
             <div className="flex justify-between">
-              <NavLink href="" className="flex gap-3">
-                <img
-                  className="h-12 w-12 rounded-full drop-shadow-md"
-                  src="https://avatars.githubusercontent.com/u/73331861?v=4"
-                  alt="Alexander Lawaetz"
-                />
-                <div className="flex grow flex-col">
-                  <p className="font-md">Alexander Lawaetz</p>
-                  <p className="text-sm font-light line-clamp-2">Bio</p>
-                </div>
-              </NavLink>
-              <button className="h-fit rounded-full border border-gray-400 py-1 px-2 hover:border-gray-600 hover:bg-gray-200">
+              <Link href="">
+                <a className="flex gap-3">
+                  <img
+                    className="h-12 w-12 rounded-full drop-shadow-md"
+                    src="https://avatars.githubusercontent.com/u/73331861?v=4"
+                    alt="Alexander Lawaetz"
+                  />
+                  <div className="flex grow flex-col">
+                    <p className="font-md">Alexander Lawaetz</p>
+                    <p className="text-sm font-light line-clamp-2">Bio</p>
+                  </div>
+                </a>
+              </Link>
+              <button className="h-fit rounded-full border border-gray-400 py-1 px-2 transition duration-200 hover:border-gray-600 hover:bg-gray-200">
                 Follow
               </button>
             </div>
@@ -143,7 +148,11 @@ const Sidebar: React.FC = () => {
         <h2 className="my-4 text-xl font-medium">Recently saved</h2>
         <div className="flex flex-col gap-2">
           {[...range(1, 3)].map((key) => (
-            <ArticleSlim key={key} />
+            <Link href="">
+              <a>
+                <ArticleSlim key={key} />
+              </a>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { AvatarImage, AvatarTypes } from './avatar'
 import {
   BanIcon,
@@ -11,8 +11,6 @@ import {
   LibraryIcon,
   SearchIcon
 } from '@heroicons/react/outline'
-import { usePopper } from 'react-popper'
-import { Popover } from '@headlessui/react'
 
 interface ClassName {
   className?: string
