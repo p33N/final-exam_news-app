@@ -1,15 +1,13 @@
-import { Popover, Tab } from '@headlessui/react'
+import { Tab } from '@headlessui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import {
-  BanButton,
-  BookmarkButton,
-  HorizontalDotsButton
-} from '../components/buttons'
+import Article, { ArticleSlim } from '../components/article'
+import { SearchButton } from '../components/buttons'
+import { NavLink } from '../components/nav'
 import { Navbar } from '../components/navbar'
 import UserTopics from '../components/usertopics'
 import classNames from '../lib/classnames'
+import range from '../lib/range'
 
 const Home: NextPage = () => {
   return (
@@ -45,8 +43,8 @@ const Home: NextPage = () => {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      'py-4 pr-4 text-gray-400',
-                      selected ? 'text-gray-900' : ''
+                      'py-4 pr-4 ',
+                      selected ? 'text-gray-900' : 'text-gray-400'
                     )
                   }
                 >
@@ -55,8 +53,8 @@ const Home: NextPage = () => {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      'py-4 pr-4 text-gray-400',
-                      selected ? 'text-gray-900' : ''
+                      'py-4 pr-4 ',
+                      selected ? 'text-gray-900' : 'text-gray-400'
                     )
                   }
                 >
@@ -74,93 +72,8 @@ const Home: NextPage = () => {
                 </Tab.Panel>
                 <Tab.Panel>
                   <div className="mt-8 flex flex-col divide-y-2">
-                    {[1, 2, 3, 4, 5, 6].map((key) => (
-                      <div className="py-5" key={key}>
-                        <div className="mb-2 flex items-center gap-1 text-sm">
-                          <img
-                            className="h-7 w-7 rounded-full"
-                            src="https://avatars.githubusercontent.com/u/73331861?v=4"
-                            alt="Alexander Lawaetz"
-                          />
-                          <span className="font-semibold">
-                            Alexander Lawaetz
-                          </span>
-                          <span className="text-gray-400">&#x2022;</span>
-                          <span className="text-gray-400">12 hours ago</span>
-                        </div>
-                        <div className="flex gap-2 md:gap-10">
-                          <div className="grow">
-                            <h2 className="mb-2 text-xl font-semibold">
-                              React Version 18 | What’s New?
-                            </h2>
-                            <div className="hidden sm:block">
-                              <p className="line-clamp-3">
-                                React V18 is finally here! And it promises a
-                                better user experience, improved performance,
-                                and long-term focus. It is particular for
-                                setting the foundation for the future of React,
-                                while also rolling out some interesting
-                                features, most of which are built around
-                                concurrent re-rendering. Using version 18 only
-                                requires dasdasdasdasda
-                              </p>
-                            </div>
-                            <div className="mt-6 flex justify-between">
-                              <div className="flex items-center gap-2 text-sm">
-                                <button className="rounded-full bg-gray-200 px-2 py-1 text-sm">
-                                  React
-                                </button>
-                                <span className="text-gray-400">
-                                  2 min read
-                                </span>
-                                <span className="hidden text-gray-400 sm:block">
-                                  &#x2022;
-                                </span>
-                                <span className="hidden text-gray-400 sm:block">
-                                  Selected for you
-                                </span>
-                              </div>
-                              <div className="flex gap-2">
-                                <button>
-                                  <BookmarkButton className="h-6 w-6 text-gray-400" />
-                                </button>
-                                <Popover className="relative">
-                                  <Popover.Button>
-                                    <HorizontalDotsButton className="text h-6 w-6" />
-                                  </Popover.Button>
-
-                                  <Popover.Panel className="absolute z-10 w-52 -translate-x-[40%] rounded-md border-2 bg-gray-50 shadow-sm">
-                                    <div className="flex flex-col items-start divide-y-2">
-                                      <div className="w-full py-4 px-6">
-                                        <button className="flex items-center gap-1 text-gray-500 hover:text-gray-900">
-                                          <BanButton className="h-4 w-4 text-gray-900" />
-                                          <div>See less of this</div>
-                                        </button>
-                                      </div>
-                                      <div className="flex w-full flex-col items-start gap-3 py-4 px-6">
-                                        <button className="text-gray-500 hover:text-gray-900">
-                                          Mute this author
-                                        </button>
-                                        <button className="text-gray-500 hover:text-gray-900">
-                                          Report
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </Popover.Panel>
-                                </Popover>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="image-container relative aspect-4 h-20 w-20 sm:h-40 sm:w-40">
-                            <Image
-                              alt="Article Image"
-                              src="/mountains.jpg"
-                              layout="fill"
-                              objectFit="contain"
-                            />
-                          </div>
-                        </div>
-                      </div>
+                    {[...range(1, 7)].map((key) => (
+                      <Article key={key} />
                     ))}
                   </div>
                 </Tab.Panel>
@@ -169,16 +82,72 @@ const Home: NextPage = () => {
           </div>
         </div>
         <div className="sticky top-0 hidden h-screen max-w-xs bg-inherit lg:block lg:max-w-sm">
-          <div className="mx-8 mt-9">
-            <p className="">
-              sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar
-              sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar
-              sidebar sidebar sidebar
-            </p>
+          <div className="mt-9 flex flex-col gap-6 px-8">
+            <Sidebar />
           </div>
         </div>
       </div>
     </div>
+  )
+}
+
+const Sidebar: React.FC = () => {
+  return (
+    <>
+      <label
+        htmlFor="search-artikel"
+        className="flex w-full items-center gap-2 rounded-full border border-gray-200 p-4 shadow-lg"
+      >
+        <SearchButton className="h-5 w-5" />
+        <input
+          id="search-artikel"
+          className="form-input h-6 w-full border-none bg-inherit p-2 hover:cursor-text"
+          type="text"
+          placeholder="Search"
+        />
+      </label>
+      <div>
+        <h2 className="my-4 text-xl font-medium">Recommended topics</h2>
+        <div className="flex flex-wrap gap-2">
+          {[...range(1, 7)].map((items) => (
+            <span className="whitespace-nowrap rounded-full bg-gray-200 py-2 px-4 text-sm">
+              Hello ello
+            </span>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 className="my-4 text-xl font-medium">Who to follow</h2>
+        <div className="flex flex-col gap-2">
+          {[...range(1, 3)].map((items) => (
+            <div className="flex justify-between">
+              <NavLink href="" className="flex gap-3">
+                <img
+                  className="h-12 w-12 rounded-full drop-shadow-md"
+                  src="https://avatars.githubusercontent.com/u/73331861?v=4"
+                  alt="Alexander Lawaetz"
+                />
+                <div className="flex grow flex-col">
+                  <p className="font-md">Alexander Lawaetz</p>
+                  <p className="text-sm font-light line-clamp-2">Bio</p>
+                </div>
+              </NavLink>
+              <button className="h-fit rounded-full border border-gray-400 py-1 px-2 hover:border-gray-600 hover:bg-gray-200">
+                Follow
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h2 className="my-4 text-xl font-medium">Recently saved</h2>
+        <div className="flex flex-col gap-2">
+          {[...range(1, 3)].map((key) => (
+            <ArticleSlim key={key} />
+          ))}
+        </div>
+      </div>
+    </>
   )
 }
 
