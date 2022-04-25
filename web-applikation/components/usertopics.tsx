@@ -1,4 +1,5 @@
 import React from 'react'
+import range from '../lib/range'
 
 const UserTopics: React.FC = () => {
   return (
@@ -6,48 +7,11 @@ const UserTopics: React.FC = () => {
       <div className="whitespace-nowrap uppercase text-gray-700">
         Your Topics
       </div>
-      <div className="container-snap flex w-full max-w-xs gap-4 overflow-x-auto rounded-full p-4 shadow-lg sm:max-w-md md:max-w-none">
-        {[
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          '',
-          ''
-        ].map((items) => (
-          <span>Hello</span>
+      <div className="container-snap flex w-full max-w-xs gap-4 overflow-x-auto rounded-full p-2 shadow-md sm:max-w-md md:max-w-none">
+        {[...range(1, 15)].map((items) => (
+          <span className="whitespace-nowrap rounded-full bg-gray-200 py-2 px-4 text-sm">
+            Hello
+          </span>
         ))}
       </div>
     </div>
