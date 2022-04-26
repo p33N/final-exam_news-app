@@ -42,6 +42,11 @@ namespace JwtBlogArtikelApi.Controllers
             return bookmark;
         }
 
+        // GET: api/User/{id}/Bookmarks/{id}
+        [HttpGet("User/{id}/Bookmark/{id}")]
+        public async Task<ActionResult<>>
+        
+
         // PUT: api/Bookmarks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

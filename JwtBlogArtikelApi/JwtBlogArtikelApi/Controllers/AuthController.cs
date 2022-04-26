@@ -25,12 +25,12 @@ namespace JwtBlogArtikelApi.Controllers
         public async Task<ActionResult<User>> Register(UserDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                      
+            User.Email = request.Email;
+            User.PasswordHash = passwordHash;
+            User.PasswordSalt = passwordSalt;
 
-            user.Email = request.Email;
-            user.passwordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            return Ok(user);
+            return Ok(User);
         }
 
         [HttpPost("login")]
@@ -53,9 +53,9 @@ namespace JwtBlogArtikelApi.Controllers
         // Create Token Function
         private string CreateToken(User user)
         {
-            List(Claim) claims = new List<Claim>
+            List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Name, user.Email)
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
@@ -64,9 +64,9 @@ namespace JwtBlogArtikelApi.Controllers
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds);
+                            claims: claims,
+                            expires: DateTime.Now.AddDays(1),
+                            signingCredentials: creds);
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
