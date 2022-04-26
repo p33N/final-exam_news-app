@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BlogArtiklen_App.Views.AboutPage"
+             xmlns:vm="clr-namespace:BlogArtiklen_App.ViewModels"
+             Title="{Binding Title}">
+    
+<ContentPage.BindingContext>
+<vm:AboutViewModel />
+    
+</ContentPage.BindingContext>
+
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <Color x:Key="Accent">#96d1ff</Color>
+    </ResourceDictionary>
+</ContentPage.Resources>
+
+<ScrollView>
+
+        <Grid HorizontalOptions="CenterAndExpand" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" Grid.Row="0">
+                <Label Text="Blog-Artiklen" HorizontalOptions="Center" FontSize="Title"/>
+                <BoxView Color="black" HeightRequest="2" HorizontalOptions="Fill"/>
+                <Label Text="  TAG-----TAG-----TAG-----TAG-----TAG-----TAG-----TAG  " FontSize="16"/>
+            </StackLayout>
+
+           
+
+            <Frame BorderColor="Black" BackgroundColor="LightGray" CornerRadius="6" Grid.Row="2" Grid.ColumnSpan="2" Margin="20">
+                <StackLayout>
+                    
+                    <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="Start">
+
+                        <Image Source="user.png" HorizontalOptions="Start" HeightRequest="30" WidthRequest="30"/>
+                        <Label Text="username" FontSize="16" ></Label>
+                        <Label Text="Title på overskriften Title på overskriften" Padding="4" WidthRequest="200" HorizontalOptions="Start" x:Name="Title" FontSize="Medium" FontAttributes="Bold" />
+                        <Label FontSize="16" HorizontalOptions="Start" x:Name="Brødtekst" WidthRequest="200" Text="Brødtekst Brødtekst Brødtekst Brødtekst Brødtekst Brødtekst Brødtekst Brødtekst Brødtekst"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1" Grid.Column="2">
+                        <Image Source="user.png" HeightRequest="100" WidthRequest="50"/>
+                        <Label Text="Billede 1" FontSize="16"></Label>
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+
+        </Grid>
+    </ScrollView>
+
+
+
+</ContentPage>

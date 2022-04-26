@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BlogArtiklen_App.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="Blue">
+    <ContentPage.Content>
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand" >
+
+            <Image Source="Logo.png" WidthRequest="200" HeightRequest="200"></Image>
+
+            <Entry Placeholder="Username" x:Name="Username_Txt" TextColor="White" PlaceholderColor="Gray"></Entry>
+            <Entry Placeholder="Password" x:Name="Password_Txt" IsPassword="True" TextColor="White" PlaceholderColor="Gray"></Entry>
+            <Button Text="LOGIN" Clicked="Button_Clicked" VerticalOptions="Center" TextColor="White" BackgroundColor="Transparent" BorderColor="White" BorderWidth="1.5" CornerRadius="50"></Button>
+
+            <Label HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Don't have an Account yet?" TextColor="Gray"/>
+                        <Span Text="CLICK HERE" TextColor="Gray" FontAttributes="Bold" TextDecorations="Underline"/>
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
