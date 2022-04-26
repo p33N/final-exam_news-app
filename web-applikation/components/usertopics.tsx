@@ -4,7 +4,7 @@ import range from '../lib/range'
 
 const UserTopics: React.FC = () => {
   return (
-    <div className="mt-9 mb-4 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+    <div className="mb-4 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
       <div className="whitespace-nowrap uppercase text-gray-700">
         Your Topics
       </div>

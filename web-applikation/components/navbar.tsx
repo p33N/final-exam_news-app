@@ -26,31 +26,31 @@ export const Navbar: React.FC = () => {
           <NavLink
             href="/"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
+            className="flex grow justify-center p-4 align-middle text-gray-500 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <HomeButton />
           </NavLink>
           <NavLink
-            href="/notifications"
+            href="/user/notifications"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
+            className="flex grow justify-center p-4 align-middle text-gray-500 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <BellButton />
           </NavLink>
           <NavLink
-            href="/bookmarks"
+            href="/user/bookmarks"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
+            className="flex grow justify-center p-4 align-middle text-gray-500 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <BookmarkButton />
           </NavLink>
           <NavLink
-            href="/drafts"
+            href="/user/stories"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
+            className="flex grow justify-center p-4 align-middle text-gray-500 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <ListStoryButton />
@@ -59,7 +59,7 @@ export const Navbar: React.FC = () => {
           <NavLink
             href="/write-story"
             passHref
-            className="flex grow justify-center p-4 align-middle text-gray-400 transition duration-200 hover:text-gray-800"
+            className="flex grow justify-center p-4 align-middle text-gray-500 transition duration-200 hover:text-gray-800"
             active="text-gray-800"
           >
             <WriteStoryButton />
@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
         <NavLink
           href="/user"
           passHref
-          className="flex justify-center px-4 py-6 align-middle  text-gray-400"
+          className="flex justify-center px-4 py-6 align-middle  text-gray-500"
           active="text-gray-800"
         >
           <AvatarButton
@@ -82,15 +82,15 @@ export const Navbar: React.FC = () => {
         <NavLink
           href="/"
           passHref
-          className="flex grow justify-center p-2 align-middle text-gray-400"
+          className="flex grow justify-center p-2 align-middle text-gray-500"
           active="text-gray-800"
         >
           <HomeButton />
         </NavLink>
         <NavLink
-          href="/bookmarks"
+          href="/user/bookmarks"
           passHref
-          className="flex grow justify-center p-2 align-middle text-gray-400"
+          className="flex grow justify-center p-2 align-middle text-gray-500"
           active="text-gray-800"
         >
           <BookmarkButton />
@@ -98,7 +98,7 @@ export const Navbar: React.FC = () => {
         <NavLink
           href="/search"
           passHref
-          className="flex grow justify-center p-2 align-middle text-gray-400"
+          className="flex grow justify-center p-2 align-middle text-gray-500"
           active="text-gray-800"
         >
           <SearchButton />
@@ -106,7 +106,7 @@ export const Navbar: React.FC = () => {
         <NavLink
           href="/user"
           passHref
-          className="flex grow justify-center p-2 align-middle text-gray-400"
+          className="flex grow justify-center p-2 align-middle text-gray-500"
           active="text-gray-800"
         >
           <AvatarButton
