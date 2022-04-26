@@ -12,12 +12,13 @@ namespace JwtBlogArtikelApi.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
         private readonly IConfiguration _configuration;
+        private readonly BlogArtiklenDbContext _context;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, BlogArtiklenDbContext context)
         {
             _configuration = configuration;
+            _context = context;
         }
 
         //Creating User with a PasswordHash in UserDto
@@ -25,10 +26,13 @@ namespace JwtBlogArtikelApi.Controllers
         public async Task<ActionResult<User>> Register(UserDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-                      
-            User.Email = request.Email;
-            User.PasswordHash = passwordHash;
-            User.PasswordSalt = passwordSalt;
+
+            var User = new User
+            {
+                Email = new Email(request.Email),
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
 
             return Ok(User);
         }
@@ -36,12 +40,14 @@ namespace JwtBlogArtikelApi.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<String>> Login(UserDto request)
         {
-            if (user.Email != request.Email)
+            User? user = _context.Users.Where(s => s.Email.Mail == request.Email).FirstOrDefault();
+
+            if (user == null)
             {
                 return BadRequest("User not found.");
             }
 
-            if(!VerifyPasswordHash(request.Password, user.passwordHash, user.PasswordSalt))
+            if(!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return BadRequest("Wrong password.");
             }
@@ -55,13 +61,13 @@ namespace JwtBlogArtikelApi.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Email)
+                new Claim(ClaimTypes.Name, user.Email.Mail)
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 _configuration.GetSection("AppSettings.Token").Value));
 
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
                             claims: claims,

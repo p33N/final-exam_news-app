@@ -42,10 +42,22 @@ namespace JwtBlogArtikelApi.Controllers
             return bookmark;
         }
 
-        // GET: api/User/{id}/Bookmarks/{id}
-        [HttpGet("User/{id}/Bookmark/{id}")]
-        public async Task<ActionResult<>>
-        
+        // GET: api/User/{id}/Bookmarks/
+        [HttpGet("User/{id}/Bookmark/")]
+        public async Task<ActionResult<IEnumerable<Bookmark>>> UserBookmarks(int id)
+        {
+            var bookmarks = await _context.Bookmarks
+                .Where(s => s.UserId == id)
+                .ToListAsync();
+
+            if (bookmarks == null)
+            {
+                return NotFound();
+            }
+
+            return bookmarks;
+        }
+
 
         // PUT: api/Bookmarks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
