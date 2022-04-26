@@ -2,6 +2,7 @@
 using JwtBlogArtikelApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JwtBlogArtikelApi.Migrations
 {
     [DbContext(typeof(BlogArtiklenDbContext))]
-    partial class BlogArtiklenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220422092216_ArticleUpdate")]
+    partial class ArticleUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
