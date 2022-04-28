@@ -40,7 +40,7 @@ namespace JwtBlogArtikelApi.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<String>> Login(UserDto request)
         {
-            User? user = _context.Users.Where(s => s.Email.Mail == request.Email).FirstOrDefault();
+            User? user = _context.Users.Where(s => s.Email.Email == request.Email).FirstOrDefault();
 
             if (user == null)
             {
@@ -61,7 +61,7 @@ namespace JwtBlogArtikelApi.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Email.Mail)
+                new Claim(ClaimTypes.Name, user.Email.Email)
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(

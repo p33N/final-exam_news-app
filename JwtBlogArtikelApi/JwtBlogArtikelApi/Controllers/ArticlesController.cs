@@ -42,6 +42,36 @@ namespace JwtBlogArtikelApi.Controllers
             return article;
         }
 
+        // GET: api/User/{id}/Articles/
+        [HttpGet("User/{id}/Articles/")]
+        public async Task<ActionResult<IEnumerable<Article>>> UserArticles(int id)
+        {
+            var articles = await _context.Articles
+                .Where(s => s.UserId == id)
+                .ToListAsync();
+
+            if (articles == null)
+            {
+                return NotFound();
+            }
+
+            return articles;
+        }
+
+        //// GET: api/Articles/Tags/
+        //[HttpGet("Articles/tags/")]
+        //public async Task<ActionResult<IEnumerable<ArticleTag>>> ArticleTags(int id)
+        //{
+        //    var tags = await _context.Tags
+        //        .Where(s => s.ArticleTags = )
+        //        .ToListAsync();
+
+        //    if (Articles == null)
+        //    {
+
+        //    }
+        //}
+
         // PUT: api/Articles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

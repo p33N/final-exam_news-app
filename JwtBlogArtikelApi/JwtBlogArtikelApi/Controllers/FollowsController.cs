@@ -42,6 +42,22 @@ namespace JwtBlogArtikelApi.Controllers
             return follow;
         }
 
+        // GET: api/User/{id}/Followers/
+        [HttpGet("User/{id}/Followers/")]
+        public async Task<ActionResult<IEnumerable<Follow>>> UserFollow(int id)
+        {
+            var follow = await _context.Follows
+                .Where(s => s.FollowerId == id)
+                .ToListAsync();
+
+            if (follow == null)
+            {
+                return NotFound();
+            }
+
+            return follow;
+        }
+
         // PUT: api/Follows/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

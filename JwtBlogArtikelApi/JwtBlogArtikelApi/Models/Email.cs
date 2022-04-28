@@ -4,7 +4,7 @@
     {
         public Email(string? email)
         {
-            Mail = email;
+            Email = email;
         }
 
         public int Id { get; set; }
@@ -16,6 +16,6 @@
         public int? NewsSignup { get; set; } = 0;
 
         public User? User { get; set; }
-        public string? Mail { get; }
+        public string? Email { get; }
     }
 }
