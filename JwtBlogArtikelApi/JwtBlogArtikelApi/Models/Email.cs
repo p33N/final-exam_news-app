@@ -1,21 +1,17 @@
-﻿namespace JwtBlogArtikelApi.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace JwtBlogArtikelApi.Models
 {
+    [Index(nameof(Mail), IsUnique = true)]
     public class Email
     {
-        public Email(string? email)
-        {
-            Email = email;
-        }
-
         public int Id { get; set; }
-
-        public string UserEmail { get; set; } = String.Empty;
-
-        public int? Activated { get; set; } = 0;
-
-        public int? NewsSignup { get; set; } = 0;
-
-        public User? User { get; set; }
-        public string? Email { get; }
+        public bool? Activated { get; set; } = false;
+        public bool? NewsSignup { get; set; } = false;
+        [JsonIgnore]
+        public User? User { get; set; } = null;
+        public string Mail { get; set; }
     }
 }

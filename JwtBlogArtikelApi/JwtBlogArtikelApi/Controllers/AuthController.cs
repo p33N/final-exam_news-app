@@ -1,6 +1,7 @@
 ﻿using JwtBlogArtikelApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -21,27 +22,32 @@ namespace JwtBlogArtikelApi.Controllers
             _context = context;
         }
 
-        //Creating User with a PasswordHash in UserDto
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(AuthDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            var User = new User
+            var user = new User
             {
-                Email = new Email(request.Email),
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Email = new Email
+                {
+                    Mail = request.Email
+                }
             };
 
-            return Ok(User);
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return Ok(user);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<String>> Login(UserDto request)
+        public async Task<ActionResult<String>> Login(AuthDto request)
         {
-            User? user = _context.Users.Where(s => s.Email.Email == request.Email).FirstOrDefault();
-
+            User? user = _context.Users.Include(s => s.Email).Where(s => s.Email.Mail == request.Email).FirstOrDefault();
+            
             if (user == null)
             {
                 return BadRequest("User not found.");
@@ -61,11 +67,11 @@ namespace JwtBlogArtikelApi.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Email.Email)
+                new Claim(ClaimTypes.Name, user.Email.Mail)
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                _configuration.GetSection("AppSettings.Token").Value));
+                _configuration.GetSection("AppSettings:Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 

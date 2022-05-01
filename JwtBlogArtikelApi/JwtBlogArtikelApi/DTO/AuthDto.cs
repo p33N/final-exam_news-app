@@ -1,6 +1,6 @@
 ﻿namespace JwtBlogArtikelApi
 {
-    public class UserDto
+    public class AuthDto
     {
         public string? Email { get; set; }
 

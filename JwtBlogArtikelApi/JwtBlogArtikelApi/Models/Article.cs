@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string? Headline { get; set; }
-        public string? Image { get; set; }
+        public byte[]? Image { get; set; }
         public string? Content { get; set; }
         public int UserId { get; set; }
         public User? Author { get; set; }

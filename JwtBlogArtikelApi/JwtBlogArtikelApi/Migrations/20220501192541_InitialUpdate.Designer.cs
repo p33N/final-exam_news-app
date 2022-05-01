@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JwtBlogArtikelApi.Migrations
 {
     [DbContext(typeof(BlogArtiklenDbContext))]
-    [Migration("20220406092521_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220501192541_InitialUpdate")]
+    partial class InitialUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,21 +28,15 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Headline")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<byte[]>("Image")
-                        .IsRequired()
                         .HasColumnType("longblob");
 
                     b.Property<int>("LikeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Likes")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -97,7 +91,6 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Body")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("LikeId")
@@ -123,17 +116,20 @@ namespace JwtBlogArtikelApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Activated")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Activated")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("NewsSignup")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserEmail")
+                    b.Property<string>("Mail")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<bool?>("NewsSignup")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Mail")
+                        .IsUnique();
 
                     b.ToTable("Emails");
                 });
@@ -180,7 +176,6 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ReplyComment")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("UserId")
@@ -204,7 +199,6 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
@@ -219,15 +213,19 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("About")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("EmailId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("longblob");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("longblob");
 
                     b.Property<bool>("Subscribtion")
                         .HasColumnType("tinyint(1)");
@@ -247,7 +245,6 @@ namespace JwtBlogArtikelApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Desciminator")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("LikeId")
@@ -434,8 +431,7 @@ namespace JwtBlogArtikelApi.Migrations
 
             modelBuilder.Entity("JwtBlogArtikelApi.Models.Email", b =>
                 {
-                    b.Navigation("User")
-                        .IsRequired();
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("JwtBlogArtikelApi.Models.Tag", b =>
