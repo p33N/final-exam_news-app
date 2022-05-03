@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using JwtBlogArtikelApi.Models;
 
 namespace JwtBlogArtikelApi.Models
 {
@@ -18,6 +19,8 @@ namespace JwtBlogArtikelApi.Models
         public DbSet<Bookmark> Bookmarks => Set<Bookmark>();
         public DbSet<ArticleTag> ArticleTags => Set<ArticleTag>();
         public DbSet<UserLike> UserLikes => Set<UserLike>();
+        public DbSet<Like> Like => Set<Like>();
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -92,6 +95,5 @@ namespace JwtBlogArtikelApi.Models
                 .WithMany(s => s.UserLikes)
                 .HasForeignKey(sc => sc.UserId);
         }
-
     }
 }

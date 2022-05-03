@@ -6,8 +6,10 @@
         public string? Name { get; set; }
         public int EmailId { get; set; }
         public Email? Email { get; set; }
+        public byte[]? PasswordHash { get; set; }
+        public byte[]? PasswordSalt { get; set; }
         public string? About { get; set; }
-        public bool Subscribtion { get; set; }
+        public bool? Subscribtion { get; set; } = false;
         public IList<Follow>? Followers { get; set; }
         public IList<Follow>? Followings { get; set; }
         public IList<Bookmark>? Bookmarks { get; set; }

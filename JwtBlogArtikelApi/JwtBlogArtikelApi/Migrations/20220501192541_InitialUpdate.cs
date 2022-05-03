@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JwtBlogArtikelApi.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,10 +19,10 @@ namespace JwtBlogArtikelApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserEmail = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Activated = table.Column<int>(type: "int", nullable: false),
-                    NewsSignup = table.Column<int>(type: "int", nullable: false)
+                    Activated = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    NewsSignup = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    Mail = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -50,7 +50,7 @@ namespace JwtBlogArtikelApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -65,10 +65,12 @@ namespace JwtBlogArtikelApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     EmailId = table.Column<int>(type: "int", nullable: false),
-                    About = table.Column<string>(type: "longtext", nullable: false)
+                    PasswordHash = table.Column<byte[]>(type: "longblob", nullable: true),
+                    PasswordSalt = table.Column<byte[]>(type: "longblob", nullable: true),
+                    About = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Subscribtion = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
@@ -90,12 +92,11 @@ namespace JwtBlogArtikelApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Headline = table.Column<string>(type: "longtext", nullable: false)
+                    Headline = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Image = table.Column<byte[]>(type: "longblob", nullable: false),
-                    Content = table.Column<string>(type: "longtext", nullable: false)
+                    Image = table.Column<byte[]>(type: "longblob", nullable: true),
+                    Content = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Likes = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     LikeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -148,7 +149,7 @@ namespace JwtBlogArtikelApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Desciminator = table.Column<string>(type: "longtext", nullable: false)
+                    Desciminator = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     OwnerId = table.Column<int>(type: "int", nullable: false),
                     LikeId = table.Column<int>(type: "int", nullable: false),
@@ -222,7 +223,7 @@ namespace JwtBlogArtikelApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Body = table.Column<string>(type: "longtext", nullable: false)
+                    Body = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ArticleId = table.Column<int>(type: "int", nullable: false),
@@ -258,7 +259,7 @@ namespace JwtBlogArtikelApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ReplyComment = table.Column<string>(type: "longtext", nullable: false)
+                    ReplyComment = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CommentId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -322,6 +323,12 @@ namespace JwtBlogArtikelApi.Migrations
                 name: "IX_Comments_UserId",
                 table: "Comments",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Emails_Mail",
+                table: "Emails",
+                column: "Mail",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Follows_FolloweringId",
