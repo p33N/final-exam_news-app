@@ -2,14 +2,18 @@ import React, { Fragment } from 'react'
 import Nav, { NavLink } from '../components/nav'
 import {
   AvatarButton,
+  BanButton,
   BellButton,
   BookmarkButton,
   HomeButton,
   HomeIconButton,
+  HorizontalDotsButton,
   ListStoryButton,
   SearchButton,
   WriteStoryButton
 } from '../components/buttons'
+import { Popover } from '@headlessui/react'
+import { SignInButton } from './auth'
 
 export const Navbar: React.FC = () => {
   return (
@@ -65,18 +69,20 @@ export const Navbar: React.FC = () => {
             <WriteStoryButton />
           </NavLink>
         </div>
-        <NavLink
-          href="/user"
-          passHref
-          className="flex justify-center px-4 py-6 align-middle  text-gray-500"
-          active="text-gray-800"
-        >
-          <AvatarButton
-            className="h-9 w-9"
-            src="https://avatars.githubusercontent.com/u/73331861?v=4"
-            alt="Alexander Lawaetz"
-          />
-        </NavLink>
+        <Popover className="relative flex justify-center">
+          <Popover.Button>
+            <AvatarButton
+              className="h-9 w-9 border border-gray-400"
+              src="/logo-placeholder-avatar.png"
+              alt="Placeholder Avatar Logo"
+            />
+          </Popover.Button>
+          <Popover.Panel className="absolute z-10 w-52 translate-x-[50%] -translate-y-[110%] rounded-md border-2 bg-gray-50 shadow-sm">
+            <div className="flex w-full justify-center py-4 px-6 text-gray-500">
+              <SignInButton />
+            </div>
+          </Popover.Panel>
+        </Popover>
       </Nav>
       <Nav className="fixed bottom-0 z-10 flex w-full justify-around gap-1 border-t-2 bg-gray-100 lg:hidden">
         <NavLink
