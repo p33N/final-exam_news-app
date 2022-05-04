@@ -16,7 +16,7 @@ const Notifications: React.FC = () => {
       <Navbar />
 
       <MainSection>
-        <div className="flex items-center justify-between">
+        <div className="items-center justify-between lg:flex">
           <h1 className="mt-4 mb-6 text-4xl font-semibold">Bookmarks</h1>
           <button className="h-10 rounded-full bg-green-700 py-2 px-4 text-white">
             New Lists
