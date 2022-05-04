@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "693db5dd-965b-4d1d-9cd3-dd8a704ff20c": {
+      "ProjectGuid": "693db5dd-965b-4d1d-9cd3-dd8a704ff20c",
+      "DisplayName": "JwtBlogArtikelApi",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

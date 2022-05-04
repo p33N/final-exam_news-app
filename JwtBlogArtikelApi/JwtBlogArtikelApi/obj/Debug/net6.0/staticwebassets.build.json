@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "GvJCcIIIKXzDqLI8F7B4LG+LXgzOwkB87USLG6tlmNo=",
+  "Source": "JwtBlogArtikelApi",
+  "BasePath": "_content/JwtBlogArtikelApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
