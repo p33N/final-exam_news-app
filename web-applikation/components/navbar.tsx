@@ -2,10 +2,12 @@ import React, { Fragment } from 'react'
 import Nav, { NavLink } from '../components/nav'
 import {
   AvatarButton,
+  BanButton,
   BellButton,
   BookmarkButton,
   HomeButton,
   HomeIconButton,
+  HorizontalDotsButton,
   ListStoryButton,
   SearchButton,
   WriteStoryButton
