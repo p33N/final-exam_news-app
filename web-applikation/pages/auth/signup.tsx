@@ -2,11 +2,13 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import axios from 'axios'
 import Link from 'next/link'
 
 interface IFormInputs {
   email: string
   password: string
+  confirmPassword: string
   rememberMe: boolean
 }
 
@@ -14,6 +16,11 @@ const schema = yup
   .object({
     email: yup.string().email().trim().required('Email field is required'),
     password: yup.string().trim().required('Password field is required'),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), null], 'Passwords must match')
+      .trim()
+      .required('Confirm password field is required'),
     rememberMe: yup.boolean()
   })
   .required()
@@ -43,7 +50,7 @@ const SignIn: React.FC = () => {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            Sign up an account
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -69,41 +76,32 @@ const SignIn: React.FC = () => {
                 id="new-password-text-field"
                 type="password"
                 {...register('password')}
-                autoComplete="old-password"
-                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                autoComplete="new-password"
+                className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Password"
               />
               <span>{errors.password?.message}</span>
             </fieldset>
-          </div>
-          <div className="flex items-center justify-between">
-            <fieldset className="flex items-center">
-              <input
-                id="remember-me"
-                {...register('rememberMe')}
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                {' '}
-                Remember me{' '}
+            <fieldset>
+              <label htmlFor="password" className="sr-only">
+                Confirm password
               </label>
+              <input
+                id="confirm-password-text-field"
+                type="password"
+                {...register('confirmPassword')}
+                autoComplete="new-password"
+                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                placeholder="Confirm password"
+              />
+              <span>{errors.confirmPassword?.message}</span>
             </fieldset>
-
-            <div className="flex flex-col text-sm">
-              <Link href="#">
+          </div>
+          <div className="flex items-center justify-end">
+            <div className="text-sm">
+              <Link href="/auth/signin">
                 <a className="font-medium text-indigo-600 hover:text-indigo-500">
-                  {' '}
-                  Forgot your password?{' '}
-                </a>
-              </Link>
-              <Link href="/auth/signup">
-                <a className="font-medium text-indigo-600 hover:text-indigo-500">
-                  {' '}
-                  Forgot to Sign Up?{' '}
+                  Already signed up?
                 </a>
               </Link>
             </div>
@@ -129,7 +127,7 @@ const SignIn: React.FC = () => {
                   />
                 </svg>
               </span>
-              Sign in
+              Sign up
             </button>
           </div>
         </form>
