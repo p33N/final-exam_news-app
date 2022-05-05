@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import axios from 'axios'
 import Link from 'next/link'
+import { ArrowLeftButton } from '../../components/buttons'
+import { useRouter } from 'next/router'
 
 interface IFormInputs {
   email: string
@@ -26,6 +27,12 @@ const schema = yup
   .required()
 
 const SignIn: React.FC = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.prefetch('/')
+  }, [])
+
   const {
     register,
     handleSubmit,
@@ -43,7 +50,10 @@ const SignIn: React.FC = () => {
   return (
     <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
-        <div>
+        <div className="relative">
+          <button onClick={() => router.push('/')}>
+            <ArrowLeftButton className="absolute top-0 left-0 h-8 w-8 translate-y-8" />
+          </button>
           <img
             className="mx-auto h-12 w-auto"
             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"

@@ -1,6 +1,7 @@
 import React from 'react'
 import { AvatarImage, AvatarTypes } from './avatar'
 import {
+  ArrowLeftIcon,
   BanIcon,
   BellIcon,
   BookmarkAltIcon,
@@ -46,6 +47,12 @@ export const BellButton: React.FC<ClassName> = ({
   className = defaultButtonStyle
 }) => {
   return <BellIcon className={className}></BellIcon>
+}
+
+export const ArrowLeftButton: React.FC<ClassName> = ({
+  className = defaultButtonStyle
+}) => {
+  return <ArrowLeftIcon className={className}></ArrowLeftIcon>
 }
 
 export const ListStoryButton: React.FC<ClassName> = ({
